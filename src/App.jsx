@@ -1,5 +1,38 @@
 import React, { useState, useEffect } from 'react';
 
+// ⚙️ HARDWARE & RTOS TECH STACK FOR MARQUEE
+const techMarqueeItems = [
+  { name: "Zephyr RTOS", category: "RTOS" },
+  { name: "ARM Cortex-M33", category: "MCU" },
+  { name: "ESP32-S3", category: "MCU" },
+  { name: "RP2350 (Pico 2)", category: "MCU" },
+  { name: "NRF52840", category: "Wireless" },
+  { name: "CC1352 / 2-FSK", category: "RF" },
+  { name: "Embedded C/C++", category: "Lang" },
+  { name: "Python HIL / pytest", category: "Testing" },
+  { name: "I2C / SPI / UART", category: "Bus" },
+  { name: "FreeRTOS", category: "RTOS" },
+  { name: "Devicetree / Kconfig", category: "Firmware" },
+  { name: "React.js", category: "Frontend" }
+];
+
+// 🚀 INFINITE SCROLL MARQUEE COMPONENT
+function TechMarquee() {
+  return (
+    <div className="marquee-container">
+      <div className="marquee-track">
+        {/* Duplicated array for seamless infinite looping */}
+        {[...techMarqueeItems, ...techMarqueeItems].map((item, idx) => (
+          <div key={idx} className="marquee-badge">
+            <span className="badge-cat">{item.category}</span>
+            <span className="badge-name">{item.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [activeSection, setActiveSection] = useState('about');
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -217,19 +250,21 @@ export default function App() {
           </div>
         </header>
 
-
         {/* ================= RIGHT COLUMN: SCROLLABLE CONTENT ================= */}
         <main className="right-column">
           
-         {/* ABOUT SECTION */}
-<section id="about" className="content-section">
-  <p>
-    Hi! I'm Biruk, an embedded systems engineer based in Sweden. Currently pursuing my Master's at <span className="text-highlight">Uppsala University</span>, I build low-level C firmware, multi-threaded Zephyr RTOS applications, and custom device drivers.
-  </p>
-  <p>
-    I thrive on the challenge of making hardware deterministic and reliable,from real-time sensor sampling and signal filtering to sub-GHz wireless protocols and automated Python <span className="text-highlight">HIL testing</span>. Having also worked as a frontend developer, I love crafting clean systems that bridge physical electronics seamlessly with host dashboards.
-  </p>
-</section>
+          {/* 🌟 HARDWARE & RTOS INFINITE MARQUEE BANNER */}
+          <TechMarquee />
+
+          {/* ABOUT SECTION */}
+          <section id="about" className="content-section">
+            <p>
+              Hi! I'm Biruk, an embedded systems engineer based in Sweden. Currently pursuing my Master's at <span className="text-highlight">Uppsala University</span>[cite: 1], I build low-level C firmware, multi-threaded Zephyr RTOS applications[cite: 1], and custom device drivers[cite: 1].
+            </p>
+            <p>
+              I thrive on the challenge of making hardware deterministic and reliable—from real-time sensor sampling and signal filtering to sub-GHz wireless protocols[cite: 1] and automated Python <span className="text-highlight">HIL testing</span>[cite: 1]. Having also worked as a frontend developer[cite: 1], I love crafting clean systems that bridge physical electronics seamlessly with host dashboards.
+            </p>
+          </section>
 
           {/* PROFESSIONAL EXPERIENCE SECTION */}
           <section id="experience" className="content-section">

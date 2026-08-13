@@ -484,3 +484,77 @@ body {
   color: var(--text-secondary);
   margin: 0;
 }
+
+/* ================= MARQUEE CONTAINER & TRACK ================= */
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 0.75rem 0;
+  margin-bottom: 2.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  /* Fade edges left & right for a sleek translucent look */
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+/* Pause scroll when user hovers mouse over any badge */
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* INFINITE LOOP ANIMATION KEYFRAMES */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* MARQUEE BADGE STYLING */
+.marquee-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: #090D16;
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  border-radius: 9999px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.marquee-badge:hover {
+  border-color: var(--accent-teal);
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(45, 212, 191, 0.25);
+}
+
+.badge-cat {
+  font-family: monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  background: rgba(45, 212, 191, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+}
+
+.badge-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #E2E8F0;
+}
