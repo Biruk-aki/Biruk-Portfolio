@@ -524,23 +524,9 @@ body {
 }
 
 /* MARQUEE BADGE STYLING */
-.marquee-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.75rem;
-  background: #090D16;
-  border: 1px solid rgba(45, 212, 191, 0.2);
-  border-radius: 9999px;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
 
-.marquee-badge:hover {
-  border-color: var(--accent-teal);
-  transform: translateY(-1px);
-  box-shadow: 0 0 10px rgba(45, 212, 191, 0.25);
-}
+
+
 
 .badge-cat {
   font-family: monospace;
@@ -557,4 +543,27 @@ body {
   font-size: 0.8rem;
   font-weight: 500;
   color: #E2E8F0;
+}
+.marquee-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.85rem;
+  background: #090D16;
+  border: 1px solid rgba(45, 212, 191, 0.25);
+  border-radius: 9999px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.badge-icon {
+  display: flex;
+  align-items: center;
+  color: var(--accent-teal);
+}
+
+.marquee-badge:hover {
+  border-color: var(--accent-teal);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(45, 212, 191, 0.3);
 }

@@ -1,29 +1,87 @@
 import React, { useState, useEffect } from 'react';
-
-// ⚙️ HARDWARE & RTOS TECH STACK FOR MARQUEE
+// ⚙️ HARDWARE & RTOS TECH STACK WITH SVG LOGOS
 const techMarqueeItems = [
-  { name: "Zephyr RTOS", category: "RTOS" },
-  { name: "ARM Cortex-M33", category: "MCU" },
-  { name: "ESP32-S3", category: "MCU" },
-  { name: "RP2350 (Pico 2)", category: "MCU" },
-  { name: "NRF52840", category: "Wireless" },
-  { name: "CC1352 / 2-FSK", category: "RF" },
-  { name: "Embedded C/C++", category: "Lang" },
-  { name: "Python HIL / pytest", category: "Testing" },
-  { name: "I2C / SPI / UART", category: "Bus" },
-  { name: "FreeRTOS", category: "RTOS" },
-  { name: "Devicetree / Kconfig", category: "Firmware" },
-  { name: "React.js", category: "Frontend" }
+  { 
+    name: "Zephyr RTOS", 
+    category: "RTOS",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13H5.5L12 6.5z"/>
+      </svg>
+    )
+  },
+  { 
+    name: "ARM Cortex", 
+    category: "MCU",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h2v6h-2zm0 8h2v2h-2z"/>
+      </svg>
+    )
+  },
+  { 
+    name: "ESP32-S3", 
+    category: "MCU",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M4 4h16v16H4V4zm2 2v12h14V6H6zm3 3h8v2H9V9zm0 4h8v2H9v-2z"/>
+      </svg>
+    )
+  },
+  { 
+    name: "C / C++", 
+    category: "Lang",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M11.5 3.5c-4.14 0-7.5 3.36-7.5 7.5s3.36 7.5 7.5 7.5c2.8 0 5.25-1.54 6.5-3.8l-2.1-1.2c-.75 1.35-2.2 2.25-3.9 2.25-2.48 0-4.5-2.02-4.5-4.5s2.02-4.5 4.5-4.5c1.7 0 3.15.9 3.9 2.25l2.1-1.2c-1.25-2.26-3.7-3.8-6.5-3.8z"/>
+      </svg>
+    )
+  },
+  { 
+    name: "Python", 
+    category: "Testing",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M11.88 2c-3.8 0-3.58 1.65-3.58 1.65v1.71h3.66v.52H6.84S4.5 5.6 4.5 9.42c0 3.83 2.05 3.7 2.05 3.7h1.23v-1.73s-.07-2.05 2.02-2.05h3.48s1.93.02 1.93-1.87V4c0-2-3.33-2-3.33-2zm-1.83 1.13a.62.62 0 1 1 0 1.25.62.62 0 0 1 0-1.25zm2.07 18.87c3.8 0 3.58-1.65 3.58-1.65v-1.71h-3.66v-.52h5.12s2.34.28 2.34-3.54c0-3.83-2.05-3.7-2.05-3.7h-1.23v1.73s.07 2.05-2.02 2.05h-3.48s-1.93-.02-1.93 1.87V20c0 2 3.33 2 3.33 2zm1.83-1.13a.62.62 0 1 1 0-1.25.62.62 0 0 1 0 1.25z"/>
+      </svg>
+    )
+  },
+  { 
+    name: "I2C / SPI / UART", 
+    category: "Bus",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM11 4h2v3h-2V4zm9 16H4V9h16v11z"/>
+      </svg>
+    )
+  },
+  { 
+    name: "native_sim", 
+    category: "TDD",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+      </svg>
+    )
+  },
+  { 
+    name: "Git / GitHub", 
+    category: "Tools",
+    svg: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+      </svg>
+    )
+  }
 ];
 
-// 🚀 INFINITE SCROLL MARQUEE COMPONENT
 function TechMarquee() {
   return (
     <div className="marquee-container">
       <div className="marquee-track">
-        {/* Duplicated array for seamless infinite looping */}
         {[...techMarqueeItems, ...techMarqueeItems].map((item, idx) => (
           <div key={idx} className="marquee-badge">
+            <span className="badge-icon">{item.svg}</span>
             <span className="badge-cat">{item.category}</span>
             <span className="badge-name">{item.name}</span>
           </div>
