@@ -37,31 +37,34 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 🌟 TOP FEATURED PROJECTS (Matches GitHub + CV)
+  
+  // 🌟 TOP FEATURED PROJECTS WITH VISUAL CARDS
   const featuredProjects = [
     {
       title: "Multi-Node Zephyr RTOS Biometric System",
       badge: "PESP Group 7 Project",
       role: "Hardware-In-The-Loop & Driver Lead",
       desc: "Distributed health telemetry platform separating sensor acquisition from data aggregation across two Raspberry Pi Pico 2 microcontrollers.",
+      // 📸 Add image path here when ready (e.g., "/projects/pico-setup.jpg")
+      image: null, 
       diagram: `[ SENSOR NODE: Pico 2 ] ──I2C (Custom Sensor API)──> [ BASE STATION: Pico 2 ] ──USB-C──> [ TERMINAL ]
    ├── Heart Rate (Analog Sen-KY039HS)                         └── Serial Telemetry
    ├── SpO2 Oximeter (I2C)
    └── Temperature Sensor (I2C)`,
       highlights: [
         "Implemented custom Zephyr Sensor API driver for inter-node I2C data streaming.",
-        "Engineered native_sim x86 host unit test suite validating I2C state machine & callback logic (write/read/stop buffers).",
-        "Built automated HIL Python test suite (pytest + pyserial) verifying sensor-to-serial telemetry over COM ports."
+        "Engineered native_sim x86 host unit test suite validating I2C state machine & callback logic.",
+        "Built automated HIL Python test suite (pytest + pyserial) verifying sensor-to-serial telemetry."
       ],
       tech: ["Zephyr RTOS", "RP2350 (Pico 2)", "native_sim", "I2C Unit Testing", "pytest", "pyserial", "C"],
       github: "https://github.com/Biruk-aki/zephyr-multi-node-health-monitor"
     },
-    
     {
       title: "ESP32-S3 Smart Actuator Controller",
       badge: "Zephyr RTOS",
       role: "Sole Developer",
       desc: "Multi-threaded Zephyr firmware managing ADC sensor sampling, digital signal filtering, and state machine motor control.",
+      image: null,
       diagram: `[ ADC Sensors ] ──> [ 8-Sample Moving Avg Filter ] ──> [ 3-State FSM Controller ] ──> [ PWM Actuators ]`,
       highlights: [
         "Real-time ADC acquisition loop with digital moving average filtering.",
@@ -76,6 +79,7 @@ export default function App() {
       badge: "Zephyr RTOS & Sensors",
       role: "Sole Developer",
       desc: "Real-time TPHG (Temperature, Pressure, Humidity, Gas) sensing platform for VOC detection using MOX metal-oxide gas sensors.",
+      image: null,
       diagram: `[ Zephyr Sensor API ] ──(I2C / Kconfig)──> [ BME680 Sensor (Heater Plate VOC Control) ]`,
       highlights: [
         "Managed sensor heater plate targeting specific temperatures for VOC detection.",
@@ -90,6 +94,7 @@ export default function App() {
       badge: "Uppsala Research (WCNES)",
       role: "Research & Firmware Lead",
       desc: "Baud rate optimization (100 kBaud → 50 kBaud) investigating SNR improvements and bit/packet error rate (BER/PER) in passive RF backscatter telemetry.",
+      image: null,
       diagram: `[ CW Carrier (NRF52840) ] ──> [ Passive Tag (Pico + Dual CC2500) ] ──(2-FSK)──> [ Receiver (CC1352) ]`,
       highlights: [
         "Collected 15 empirical log datasets across 5 carrier distances and 3 baud rates.",
@@ -98,9 +103,9 @@ export default function App() {
       ],
       tech: ["Embedded C", "2-FSK Modulation", "NRF52840", "CC1352", "CC2500", "Python Analysis"],
       github: "https://github.com/Biruk-aki"
-    }
+    },
+    
   ];
-
   // 📦 SECONDARY / COLLAPSIBLE WORK
   const secondaryProjects = [
     {
@@ -259,43 +264,60 @@ export default function App() {
           </section>
 
           {/* TOP FEATURED PROJECTS */}
-          <section id="projects" className="content-section">
-            <h3 className="section-label">FEATURED EMBEDDED PROJECTS</h3>
-            
-            <div className="projects-list">
-              {featuredProjects.map((p, idx) => (
-                <div key={idx} className="project-card">
-                  <div className="card-top">
-                    <h4 className="project-name">
-                      <a href={p.github} target="_blank" rel="noreferrer">
-                        {p.title} <span className="arrow">↗</span>
-                      </a>
-                    </h4>
-                    <span className="badge">{p.badge}</span>
-                  </div>
+<section id="projects" className="content-section">
+  <h3 className="section-label">FEATURED EMBEDDED PROJECTS</h3>
+  
+  <div className="projects-list">
+    {featuredProjects.map((p, idx) => (
+      <div key={idx} className="project-card">
+        
+        {/* VISUAL HARDWARE / TERMINAL HEADER BAR */}
+        <div className="visual-window-header">
+          <div className="window-dots">
+            <span className="dot dot-red"></span>
+            <span className="dot dot-yellow"></span>
+            <span className="dot dot-green"></span>
+          </div>
+          <span className="window-title">firmware_target: {p.tech[0]}</span>
+        </div>
 
-                  <p className="project-role">{p.role}</p>
-                  <p className="project-desc">{p.desc}</p>
+        {/* IMAGE / HARDWARE DISPLAY */}
+        {p.image ? (
+          <div className="project-img-box">
+            <img src={p.image} alt={p.title} className="project-img" />
+          </div>
+        ) : (
+          <div className="diagram-box">
+            <pre className="diagram-text">{p.diagram}</pre>
+          </div>
+        )}
 
-                  <div className="diagram-box">
-                    <pre className="diagram-text">{p.diagram}</pre>
-                  </div>
+        <div className="card-top">
+          <h4 className="project-name">
+            <a href={p.github} target="_blank" rel="noreferrer">
+              {p.title} <span className="arrow">↗</span>
+            </a>
+          </h4>
+          <span className="badge">{p.badge}</span>
+        </div>
 
-                  <ul className="highlights">
-                    {p.highlights.map((h, hIdx) => (
-                      <li key={hIdx}>{h}</li>
-                    ))}
-                  </ul>
+        <p className="project-role">{p.role}</p>
+        <p className="project-desc">{p.desc}</p>
 
-                  <div className="tag-list">
-                    {p.tech.map((t, tIdx) => (
-                      <span key={tIdx} className="pill-tag">{t}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+        <ul className="highlights">
+          {p.highlights.map((h, hIdx) => (
+            <li key={hIdx}>{h}</li>
+          ))}
+        </ul>
 
+        <div className="tag-list">
+          {p.tech.map((t, tIdx) => (
+            <span key={tIdx} className="pill-tag">{t}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
             {/* 📦 COLLAPSIBLE SECONDARY TECHNICAL WORK */}
             <div className="secondary-work-box">
               <button 
