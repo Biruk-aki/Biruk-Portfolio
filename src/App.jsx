@@ -73,22 +73,22 @@ export default function App() {
   // 🌟 TOP FEATURED PROJECTS (Matches GitHub + CV)
   const featuredProjects = [
     {
-      title: "Multi-Node Zephyr RTOS Biometric System",
-      badge: "PESP Group 7 Project",
-      role: "Hardware-In-The-Loop & Driver Lead",
-      desc: "Distributed health telemetry platform separating sensor acquisition from data aggregation across two Raspberry Pi Pico 2 microcontrollers.",
-      diagram: `[ SENSOR NODE: Pico 2 ] ──I2C (Custom Sensor API)──> [ BASE STATION: Pico 2 ] ──USB-C──> [ TERMINAL ]
+  title: "Multi-Node Zephyr RTOS Biometric System",
+  badge: "PESP Group 7 Project",
+  role: "Hardware-In-The-Loop & Driver Lead",
+  desc: "Distributed health telemetry platform separating sensor acquisition from data aggregation across two Raspberry Pi Pico 2 microcontrollers.",
+  diagram: `[ SENSOR NODE: Pico 2 ] ──I2C (Custom Sensor API)──> [ BASE STATION: Pico 2 ] ──USB-C──> [ TERMINAL ]
    ├── Heart Rate (Analog Sen-KY039HS)                         └── Serial Telemetry
    ├── SpO2 Oximeter (I2C)
    └── Temperature Sensor (I2C)`,
-      highlights: [
-        "Implemented custom Zephyr Sensor API driver for inter-node I2C data streaming.",
-        "Built automated HIL Python test suite (pytest + pyserial) verifying sensor-to-serial telemetry over COM ports.",
-        "Integrated multi-threaded ADC sampling and PPG pulse oximetry."
-      ],
-      tech: ["Zephyr RTOS", "RP2350 (Pico 2)", "I2C", "Custom Drivers", "pytest", "pyserial", "C"],
-      github: "https://github.com/Biruk-aki/zephyr-multi-node-health-monitor"
-    },
+  highlights: [
+    "Implemented custom Zephyr Sensor API driver for inter-node I2C data streaming.",
+    "Engineered native_sim x86 host unit test suite validating I2C state machine & callback logic (write/read/stop buffers).",
+    "Built automated HIL Python test suite (pytest + pyserial) verifying sensor-to-serial telemetry over COM ports."
+  ],
+  tech: ["Zephyr RTOS", "RP2350 (Pico 2)", "native_sim", "I2C Unit Testing", "pytest", "West / C"],
+  github: "https://github.com/Biruk-aki/zephyr-multi-node-health-monitor"
+},
     {
       title: "Dyadic Backscatter Communication Optimization",
       badge: "Uppsala Research (WCNES)",
@@ -349,23 +349,23 @@ export default function App() {
           </section>
 
           {/* TECH STACK MATRIX */}
-          <section id="stack" className="content-section">
-            <h3 className="section-label">TECHNICAL SKILLS MATRIX</h3>
-            <div className="stack-grid">
-              <div className="stack-card">
-                <h4>Microcontrollers & Hardware</h4>
-                <p>ARM Cortex-M33 (RP2350), ESP32-S3, AVR ATmega, NRF52840, CC1352, CC2500[cite: 1]</p>
-              </div>
-              <div className="stack-card">
-                <h4>RTOS & Protocols</h4>
-                <p>Zephyr RTOS, FreeRTOS, Custom Drivers, I2C, SPI, UART, CAN Bus, Sub-GHz Wireless[cite: 1]</p>
-              </div>
-              <div className="stack-card">
-                <h4>Testing, Tools & Analysis</h4>
-                <p>Python HIL (pytest + pyserial), Oscilloscopes, Logic Analyzers, GDB, Git, React.js[cite: 1]</p>
-              </div>
-            </div>
-          </section>
+<section id="stack" className="content-section">
+  <h3 className="section-label">TECHNICAL SKILLS MATRIX</h3>
+  <div className="stack-grid">
+    <div className="stack-card">
+      <h4>Microcontrollers & Hardware</h4>
+      <p>ARM Cortex-M33 (RP2350), ESP32-S3, AVR ATmega, NRF52840, CC1352, CC2500</p>
+    </div>
+    <div className="stack-card">
+      <h4>RTOS & Protocols</h4>
+      <p>Zephyr RTOS, FreeRTOS, Custom Drivers, I2C, SPI, UART, CAN Bus, Sub-GHz Wireless</p>
+    </div>
+    <div className="stack-card">
+      <h4>Testing & Verification</h4>
+      <p>Zephyr native_sim, Host Unit Testing (ZTest), Python HIL (pytest + pyserial), Oscilloscopes, Logic Analyzers, GDB, Git</p>
+    </div>
+  </div>
+</section>
 
           <footer className="right-footer">
             <p>Designed & Built by Biruk Ambaye • Uppsala University • 2026</p>
