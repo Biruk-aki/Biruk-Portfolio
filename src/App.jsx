@@ -56,20 +56,7 @@ export default function App() {
       tech: ["Zephyr RTOS", "RP2350 (Pico 2)", "native_sim", "I2C Unit Testing", "pytest", "pyserial", "C"],
       github: "https://github.com/Biruk-aki/zephyr-multi-node-health-monitor"
     },
-    {
-      title: "Dyadic Backscatter Communication Optimization",
-      badge: "Uppsala Research (WCNES)",
-      role: "Research & Firmware Lead",
-      desc: "Baud rate optimization (100 kBaud → 50 kBaud) investigating SNR improvements and bit/packet error rate (BER/PER) in passive RF backscatter telemetry.",
-      diagram: `[ CW Carrier (NRF52840) ] ──> [ Passive Tag (Pico + Dual CC2500) ] ──(2-FSK)──> [ Receiver (CC1352) ]`,
-      highlights: [
-        "Collected 15 empirical log datasets across 5 carrier distances and 3 baud rates.",
-        "Built automated Python log parsing script handling multi-format SmartRF Studio data.",
-        "Validated hardware sync-word packet rejection by injecting single-bit errors."
-      ],
-      tech: ["Embedded C", "2-FSK Modulation", "NRF52840", "CC1352", "CC2500", "Python Analysis"],
-      github: "https://github.com/Biruk-aki"
-    },
+    
     {
       title: "ESP32-S3 Smart Actuator Controller",
       badge: "Zephyr RTOS",
@@ -97,6 +84,20 @@ export default function App() {
       ],
       tech: ["C", "Zephyr RTOS", "RP2350", "BME680", "I2C", "Devicetree"],
       github: "https://github.com/Biruk-aki/zephyr-bme680-driver"
+    },
+    {
+      title: "Dyadic Backscatter Communication Optimization",
+      badge: "Uppsala Research (WCNES)",
+      role: "Research & Firmware Lead",
+      desc: "Baud rate optimization (100 kBaud → 50 kBaud) investigating SNR improvements and bit/packet error rate (BER/PER) in passive RF backscatter telemetry.",
+      diagram: `[ CW Carrier (NRF52840) ] ──> [ Passive Tag (Pico + Dual CC2500) ] ──(2-FSK)──> [ Receiver (CC1352) ]`,
+      highlights: [
+        "Collected 15 empirical log datasets across 5 carrier distances and 3 baud rates.",
+        "Built automated Python log parsing script handling multi-format SmartRF Studio data.",
+        "Validated hardware sync-word packet rejection by injecting single-bit errors."
+      ],
+      tech: ["Embedded C", "2-FSK Modulation", "NRF52840", "CC1352", "CC2500", "Python Analysis"],
+      github: "https://github.com/Biruk-aki"
     }
   ];
 
@@ -226,7 +227,7 @@ export default function App() {
               Hi! I'm Biruk, an embedded systems engineer based in Sweden. Currently pursuing my Master's at <span className="text-highlight">Uppsala University</span>, I build low-level C firmware, multi-threaded Zephyr RTOS applications, and custom device drivers.
             </p>
             <p>
-              I thrive on the challenge of making hardware deterministic and reliable—from real-time sensor sampling and signal filtering to sub-GHz wireless protocols and automated Python <span className="text-highlight">HIL testing</span>.
+              I thrive on the challenge of making hardware deterministic and reliable from real-time sensor sampling and signal filtering to sub-GHz wireless protocols and automated Python <span className="text-highlight">HIL testing</span>.
             </p>
           </section>
 
@@ -237,22 +238,22 @@ export default function App() {
             <div className="stack-grid">
               <div className="stack-card">
                 <h4>Microcontrollers & Architectures</h4>
-                <p>ARM Cortex-M33 (RP2350/Pico 2), ESP32-S3, NRF52840, CC1352, AVR ATmega[cite: 1]</p>
+                <p>ARM Cortex-M33 (RP2350/Pico 2), ESP32-S3, NRF52840, CC1352, AVR ATmega</p>
               </div>
 
               <div className="stack-card">
                 <h4>RTOS & Firmware Development</h4>
-                <p>Zephyr RTOS, FreeRTOS, Custom Sensor API Drivers, Devicetree Overlays, Kconfig, Thread Sync (Mutexes/Semaphores)[cite: 1]</p>
+                <p>Zephyr RTOS, FreeRTOS, Custom Sensor API Drivers, Devicetree Overlays, Kconfig, Thread Sync (Mutexes/Semaphores)</p>
               </div>
 
               <div className="stack-card">
                 <h4>Testing, Simulation & Tools</h4>
-                <p>Zephyr native_sim (Host Unit Testing), Python HIL (pytest + pyserial), Oscilloscopes, Logic Analyzers, GDB, Git[cite: 1]</p>
+                <p>Zephyr native_sim (Host Unit Testing), Python HIL (pytest + pyserial), Oscilloscopes, Logic Analyzers, GDB, Git</p>
               </div>
 
               <div className="stack-card">
                 <h4>Protocols & Wireless Communication</h4>
-                <p>I2C, SPI, UART, CAN Bus, 2-FSK Sub-GHz Wireless, Dyadic Backscatter Telemetry[cite: 1]</p>
+                <p>I2C, SPI, UART, CAN Bus, 2-FSK Sub-GHz Wireless, Dyadic Backscatter Telemetry </p>
               </div>
             </div>
           </section>
