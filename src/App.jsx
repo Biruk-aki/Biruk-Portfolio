@@ -259,10 +259,10 @@ export default function App() {
           {/* ABOUT SECTION */}
           <section id="about" className="content-section">
             <p>
-              Hi! I'm Biruk, an embedded systems engineer based in Sweden. Currently pursuing my Master's at <span className="text-highlight">Uppsala University</span>[cite: 1], I build low-level C firmware, multi-threaded Zephyr RTOS applications[cite: 1], and custom device drivers[cite: 1].
+              Hi! I'm Biruk, an embedded systems engineer based in Sweden. Currently pursuing my Master's at <span className="text-highlight">Uppsala University</span>, I build low-level C firmware, multi-threaded Zephyr RTOS applications, and custom device drivers.
             </p>
             <p>
-              I thrive on the challenge of making hardware deterministic and reliable—from real-time sensor sampling and signal filtering to sub-GHz wireless protocols[cite: 1] and automated Python <span className="text-highlight">HIL testing</span>[cite: 1]. Having also worked as a frontend developer[cite: 1], I love crafting clean systems that bridge physical electronics seamlessly with host dashboards.
+              I thrive on the challenge of making hardware deterministic and reliable—from real-time sensor sampling and signal filtering to sub-GHz wireless protocols and automated Python <span className="text-highlight">HIL testing</span>. Having also worked as a frontend developer , I love crafting clean systems that bridge physical electronics seamlessly with host dashboards.
             </p>
           </section>
 
