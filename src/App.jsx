@@ -1,95 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// ⚙️ HARDWARE & RTOS TECH STACK WITH SVG LOGOS
-const techMarqueeItems = [
-  { 
-    name: "Zephyr RTOS", 
-    category: "RTOS",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13H5.5L12 6.5z"/>
-      </svg>
-    )
-  },
-  { 
-    name: "ARM Cortex", 
-    category: "MCU",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h2v6h-2zm0 8h2v2h-2z"/>
-      </svg>
-    )
-  },
-  { 
-    name: "ESP32-S3", 
-    category: "MCU",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M4 4h16v16H4V4zm2 2v12h14V6H6zm3 3h8v2H9V9zm0 4h8v2H9v-2z"/>
-      </svg>
-    )
-  },
-  { 
-    name: "C / C++", 
-    category: "Lang",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M11.5 3.5c-4.14 0-7.5 3.36-7.5 7.5s3.36 7.5 7.5 7.5c2.8 0 5.25-1.54 6.5-3.8l-2.1-1.2c-.75 1.35-2.2 2.25-3.9 2.25-2.48 0-4.5-2.02-4.5-4.5s2.02-4.5 4.5-4.5c1.7 0 3.15.9 3.9 2.25l2.1-1.2c-1.25-2.26-3.7-3.8-6.5-3.8z"/>
-      </svg>
-    )
-  },
-  { 
-    name: "Python", 
-    category: "Testing",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M11.88 2c-3.8 0-3.58 1.65-3.58 1.65v1.71h3.66v.52H6.84S4.5 5.6 4.5 9.42c0 3.83 2.05 3.7 2.05 3.7h1.23v-1.73s-.07-2.05 2.02-2.05h3.48s1.93.02 1.93-1.87V4c0-2-3.33-2-3.33-2zm-1.83 1.13a.62.62 0 1 1 0 1.25.62.62 0 0 1 0-1.25zm2.07 18.87c3.8 0 3.58-1.65 3.58-1.65v-1.71h-3.66v-.52h5.12s2.34.28 2.34-3.54c0-3.83-2.05-3.7-2.05-3.7h-1.23v1.73s.07 2.05-2.02 2.05h-3.48s-1.93-.02-1.93 1.87V20c0 2 3.33 2 3.33 2zm1.83-1.13a.62.62 0 1 1 0-1.25.62.62 0 0 1 0 1.25z"/>
-      </svg>
-    )
-  },
-  { 
-    name: "I2C / SPI / UART", 
-    category: "Bus",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM11 4h2v3h-2V4zm9 16H4V9h16v11z"/>
-      </svg>
-    )
-  },
-  { 
-    name: "native_sim", 
-    category: "TDD",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-      </svg>
-    )
-  },
-  { 
-    name: "Git / GitHub", 
-    category: "Tools",
-    svg: (
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-      </svg>
-    )
-  }
-];
-
-function TechMarquee() {
-  return (
-    <div className="marquee-container">
-      <div className="marquee-track">
-        {[...techMarqueeItems, ...techMarqueeItems].map((item, idx) => (
-          <div key={idx} className="marquee-badge">
-            <span className="badge-icon">{item.svg}</span>
-            <span className="badge-cat">{item.category}</span>
-            <span className="badge-name">{item.name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('about');
@@ -108,7 +17,7 @@ export default function App() {
   // Update active navigation highlight on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'experience', 'projects', 'stack'];
+      const sections = ['about', 'skills', 'projects', 'experience'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -131,22 +40,22 @@ export default function App() {
   // 🌟 TOP FEATURED PROJECTS (Matches GitHub + CV)
   const featuredProjects = [
     {
-  title: "Multi-Node Zephyr RTOS Biometric System",
-  badge: "PESP Group 7 Project",
-  role: "Hardware-In-The-Loop & Driver Lead",
-  desc: "Distributed health telemetry platform separating sensor acquisition from data aggregation across two Raspberry Pi Pico 2 microcontrollers.",
-  diagram: `[ SENSOR NODE: Pico 2 ] ──I2C (Custom Sensor API)──> [ BASE STATION: Pico 2 ] ──USB-C──> [ TERMINAL ]
+      title: "Multi-Node Zephyr RTOS Biometric System",
+      badge: "PESP Group 7 Project",
+      role: "Hardware-In-The-Loop & Driver Lead",
+      desc: "Distributed health telemetry platform separating sensor acquisition from data aggregation across two Raspberry Pi Pico 2 microcontrollers.",
+      diagram: `[ SENSOR NODE: Pico 2 ] ──I2C (Custom Sensor API)──> [ BASE STATION: Pico 2 ] ──USB-C──> [ TERMINAL ]
    ├── Heart Rate (Analog Sen-KY039HS)                         └── Serial Telemetry
    ├── SpO2 Oximeter (I2C)
    └── Temperature Sensor (I2C)`,
-  highlights: [
-    "Implemented custom Zephyr Sensor API driver for inter-node I2C data streaming.",
-    "Engineered native_sim x86 host unit test suite validating I2C state machine & callback logic (write/read/stop buffers).",
-    "Built automated HIL Python test suite (pytest + pyserial) verifying sensor-to-serial telemetry over COM ports."
-  ],
-  tech: ["Zephyr RTOS", "RP2350 (Pico 2)", "native_sim", "I2C Unit Testing", "pytest", "West / C"],
-  github: "https://github.com/Biruk-aki/zephyr-multi-node-health-monitor"
-},
+      highlights: [
+        "Implemented custom Zephyr Sensor API driver for inter-node I2C data streaming.",
+        "Engineered native_sim x86 host unit test suite validating I2C state machine & callback logic (write/read/stop buffers).",
+        "Built automated HIL Python test suite (pytest + pyserial) verifying sensor-to-serial telemetry over COM ports."
+      ],
+      tech: ["Zephyr RTOS", "RP2350 (Pico 2)", "native_sim", "I2C Unit Testing", "pytest", "pyserial", "C"],
+      github: "https://github.com/Biruk-aki/zephyr-multi-node-health-monitor"
+    },
     {
       title: "Dyadic Backscatter Communication Optimization",
       badge: "Uppsala Research (WCNES)",
@@ -215,21 +124,21 @@ export default function App() {
     }
   ];
 
-  // 💼 WORK EXPERIENCE (From CV)
+  // 💼 PREVIOUS WEB EXPERIENCE (Condensed at the bottom)
   const experiences = [
     {
       period: "2024 — 2025",
       role: "Junior Frontend Web Developer",
       company: "Aynalem Electronics",
-      desc: "Developed modular and reusable React.js interfaces. Applied strict code review standards and optimized frontend state management logic for high-performance applications.",
-      tech: ["React.js", "JavaScript", "Software Quality", "Code Reviews"]
+      desc: "Developed modular React.js user interfaces, applying strict software quality standards and state management optimization.",
+      tech: ["React.js", "JavaScript", "Software Quality"]
     },
     {
       period: "2023 — 2024",
       role: "Frontend Web Developer",
       company: "Proxima Technologies",
-      desc: "Collaborated in an agile Scrum environment using Git version control for high-velocity feature delivery, translating technical requirements into functional software.",
-      tech: ["React.js", "Git", "Agile / Scrum", "Documentation"]
+      desc: "Collaborated in an agile Scrum environment using Git version control for feature delivery and documentation.",
+      tech: ["React.js", "Git", "Agile / Scrum"]
     }
   ];
 
@@ -267,17 +176,17 @@ export default function App() {
                 <span className="nav-indicator"></span>
                 <span className="nav-text">ABOUT</span>
               </a>
-              <a href="#experience" className={`nav-link ${activeSection === 'experience' ? 'active' : ''}`}>
+              <a href="#skills" className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`}>
                 <span className="nav-indicator"></span>
-                <span className="nav-text">EXPERIENCE</span>
+                <span className="nav-text">EMBEDDED SKILLS</span>
               </a>
               <a href="#projects" className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`}>
                 <span className="nav-indicator"></span>
-                <span className="nav-text">PROJECTS</span>
+                <span className="nav-text">FEATURED PROJECTS</span>
               </a>
-              <a href="#stack" className={`nav-link ${activeSection === 'stack' ? 'active' : ''}`}>
+              <a href="#experience" className={`nav-link ${activeSection === 'experience' ? 'active' : ''}`}>
                 <span className="nav-indicator"></span>
-                <span className="nav-text">TECH STACK</span>
+                <span className="nav-text">OTHER EXPERIENCE</span>
               </a>
             </nav>
           </div>
@@ -311,43 +220,46 @@ export default function App() {
         {/* ================= RIGHT COLUMN: SCROLLABLE CONTENT ================= */}
         <main className="right-column">
           
-          {/* 🌟 HARDWARE & RTOS INFINITE MARQUEE BANNER */}
-          <TechMarquee />
-
           {/* ABOUT SECTION */}
           <section id="about" className="content-section">
             <p>
               Hi! I'm Biruk, an embedded systems engineer based in Sweden. Currently pursuing my Master's at <span className="text-highlight">Uppsala University</span>, I build low-level C firmware, multi-threaded Zephyr RTOS applications, and custom device drivers.
             </p>
             <p>
-              I thrive on the challenge of making hardware deterministic and reliable—from real-time sensor sampling and signal filtering to sub-GHz wireless protocols and automated Python <span className="text-highlight">HIL testing</span>. Having also worked as a frontend developer , I love crafting clean systems that bridge physical electronics seamlessly with host dashboards.
+              I thrive on the challenge of making hardware deterministic and reliable—from real-time sensor sampling and signal filtering to sub-GHz wireless protocols and automated Python <span className="text-highlight">HIL testing</span>.
             </p>
           </section>
 
-          {/* PROFESSIONAL EXPERIENCE SECTION */}
-          <section id="experience" className="content-section">
-            <h3 className="section-label">WORK EXPERIENCE</h3>
-            <div className="exp-list">
-              {experiences.map((e, idx) => (
-                <div key={idx} className="exp-card">
-                  <span className="exp-period">{e.period}</span>
-                  <div>
-                    <h4 className="exp-title">{e.role} • <span className="text-highlight">{e.company}</span></h4>
-                    <p className="exp-desc">{e.desc}</p>
-                    <div className="tag-list">
-                      {e.tech.map((t, tIdx) => (
-                        <span key={tIdx} className="pill-tag">{t}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+          {/* ⚡ CLEAR STATIC EMBEDDED SKILLS DASHBOARD */}
+          <section id="skills" className="content-section">
+            <h3 className="section-label">EMBEDDED ENGINEERING SKILLS</h3>
+            
+            <div className="stack-grid">
+              <div className="stack-card">
+                <h4>Microcontrollers & Architectures</h4>
+                <p>ARM Cortex-M33 (RP2350/Pico 2), ESP32-S3, NRF52840, CC1352, AVR ATmega[cite: 1]</p>
+              </div>
+
+              <div className="stack-card">
+                <h4>RTOS & Firmware Development</h4>
+                <p>Zephyr RTOS, FreeRTOS, Custom Sensor API Drivers, Devicetree Overlays, Kconfig, Thread Sync (Mutexes/Semaphores)[cite: 1]</p>
+              </div>
+
+              <div className="stack-card">
+                <h4>Testing, Simulation & Tools</h4>
+                <p>Zephyr native_sim (Host Unit Testing), Python HIL (pytest + pyserial), Oscilloscopes, Logic Analyzers, GDB, Git[cite: 1]</p>
+              </div>
+
+              <div className="stack-card">
+                <h4>Protocols & Wireless Communication</h4>
+                <p>I2C, SPI, UART, CAN Bus, 2-FSK Sub-GHz Wireless, Dyadic Backscatter Telemetry[cite: 1]</p>
+              </div>
             </div>
           </section>
 
           {/* TOP FEATURED PROJECTS */}
           <section id="projects" className="content-section">
-            <h3 className="section-label">FEATURED ENGINEERING PROJECTS</h3>
+            <h3 className="section-label">FEATURED EMBEDDED PROJECTS</h3>
             
             <div className="projects-list">
               {featuredProjects.map((p, idx) => (
@@ -406,24 +318,26 @@ export default function App() {
             </div>
           </section>
 
-          {/* TECH STACK MATRIX */}
-<section id="stack" className="content-section">
-  <h3 className="section-label">TECHNICAL SKILLS MATRIX</h3>
-  <div className="stack-grid">
-    <div className="stack-card">
-      <h4>Microcontrollers & Hardware</h4>
-      <p>ARM Cortex-M33 (RP2350), ESP32-S3, AVR ATmega, NRF52840, CC1352, CC2500</p>
-    </div>
-    <div className="stack-card">
-      <h4>RTOS & Protocols</h4>
-      <p>Zephyr RTOS, FreeRTOS, Custom Drivers, I2C, SPI, UART, CAN Bus, Sub-GHz Wireless</p>
-    </div>
-    <div className="stack-card">
-      <h4>Testing & Verification</h4>
-      <p>Zephyr native_sim, Host Unit Testing (ZTest), Python HIL (pytest + pyserial), Oscilloscopes, Logic Analyzers, GDB, Git</p>
-    </div>
-  </div>
-</section>
+          {/* CONDENSED OTHER EXPERIENCE AT THE BOTTOM */}
+          <section id="experience" className="content-section">
+            <h3 className="section-label">OTHER TECHNICAL EXPERIENCE</h3>
+            <div className="exp-list">
+              {experiences.map((e, idx) => (
+                <div key={idx} className="exp-card">
+                  <span className="exp-period">{e.period}</span>
+                  <div>
+                    <h4 className="exp-title">{e.role} • <span className="text-highlight">{e.company}</span></h4>
+                    <p className="exp-desc">{e.desc}</p>
+                    <div className="tag-list">
+                      {e.tech.map((t, tIdx) => (
+                        <span key={tIdx} className="pill-tag">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
 
           <footer className="right-footer">
             <p>Designed & Built by Biruk Ambaye • Uppsala University • 2026</p>
