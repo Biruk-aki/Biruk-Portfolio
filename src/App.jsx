@@ -142,7 +142,7 @@ export default function App() {
           <ol>
             <li><a href="#about"><span className="num">01.</span> About</a></li>
             <li><a href="#skills"><span className="num">02.</span> Skills</a></li>
-            <li><a href="#projects"><span className="num">03.</span> Work</a></li>
+            <li><a href="#projects"><span className="num">03.</span> Projects</a></li>
             <li><a href="#experience"><span className="num">04.</span> Experience</a></li>
           </ol>
           <a href="/Biruk_Ambaye_CV.pdf" target="_blank" rel="noreferrer" className="resume-btn">
