@@ -6,6 +6,27 @@ export default function App() {
   // 🌟 TOP FEATURED PROJECTS
   const featuredProjects = [
     {
+      title: "ESP32-S3 BLE HOGP Multi-Mode Macro Controller",
+      badge: "Zephyr RTOS & BLE HID",
+      role: "Sole Embedded Developer",
+      desc: "Driverless Bluetooth Low Energy desktop controller implementing HID over GATT (HOGP) for real-time audio scrubbing, mouse wheel scrolling, and display brightness control.",
+      diagram: `[ 10kΩ Potentiometer (ADC1_CH6) ] ──> [ EMA Filter & Deadband ] ──> [ 3-State Mode FSM ] 
+                                                                         │
+[ 3x Tactile Switches (GPIO 4, 5, 6) ] ──────────────────────────────────┤
+                                                                         ▼
+                                                       [ BLE HOGP Composite GATT Server ]
+                                                       ├── Report ID 1: Consumer Control
+                                                       ├── Report ID 2: Mouse (Wheel Axis)
+                                                       └── Status LED Async Work Queue`,
+      highlights: [
+        "Architected composite BLE HID report descriptor combining Consumer Control (0x0C) and Mouse Pointer (0x01) endpoints for native cross-platform support without host drivers.",
+        "Implemented 12 dB ADC attenuation with a 1st-order Exponential Moving Average (EMA) filter and dynamic deadband window, eliminating wiper noise and phantom packets.",
+        "Engineered a non-blocking 3-mode finite state machine with asynchronous k_work_delayable background LED blink engine and long-press detection."
+      ],
+      tech: ["Zephyr RTOS", "ESP32-S3", "BLE HOGP", "Composite HID", "ADC Calibration", "EMA Filtering", "C"],
+      github: "https://github.com/Biruk-aki/esp32s3-ble-macro-knob"
+    },
+    {
       title: "Multi-Node Zephyr RTOS Biometric System",
       badge: "PESP Group 7 Project",
       role: "Hardware-In-The-Loop & Driver Lead",
@@ -188,7 +209,7 @@ export default function App() {
           <h2 className="section-heading"><span className="num">01.</span> About Me</h2>
           <div className="about-content">
             <p>
-              My core work centers on making hardware reliable and deterministic. I handle real-time sensor processing, signal filtering, sub-GHz wireless protocols, and automated HIL testing using Python.
+              My core work centers on making hardware reliable and deterministic. I handle real-time sensor processing, signal filtering, Bluetooth Low Energy (HOGP) protocols, sub-GHz RF communications, and automated HIL testing using Python.
             </p>
             <p>
               Having also developed software, I enjoy connecting physical embedded devices with clean host dashboards.
@@ -202,7 +223,7 @@ export default function App() {
           <div className="skills-grid">
             <div className="skill-card">
               <h4>Microcontrollers & Architectures</h4>
-              <p>ARM Cortex-M33 (RP2350), ESP32-S3, NRF52840, CC1352, AVR ATmega</p>
+              <p>ARM Cortex-M33 (RP2350), ESP32-S3 (Xtensa LX7), NRF52840, CC1352, AVR ATmega</p>
             </div>
             <div className="skill-card">
               <h4>RTOS & Firmware</h4>
@@ -213,8 +234,8 @@ export default function App() {
               <p>Zephyr native_sim (Host Unit Testing), Python HIL (pytest + pyserial), Oscilloscopes, Logic Analyzers</p>
             </div>
             <div className="skill-card">
-              <h4>Protocols & RF</h4>
-              <p>I2C, SPI, UART, CAN Bus, 2-FSK Sub-GHz Wireless, Backscatter Telemetry</p>
+              <h4>Protocols & Wireless</h4>
+              <p>BLE HOGP (Composite HID), I2C, SPI, UART, CAN Bus, 2-FSK Sub-GHz Wireless, Backscatter Telemetry</p>
             </div>
           </div>
         </section>
