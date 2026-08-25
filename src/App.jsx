@@ -6,24 +6,19 @@ export default function App() {
   // 🌟 TOP FEATURED PROJECTS
   const featuredProjects = [
     {
-      title: "ESP32-S3 BLE HOGP Multi-Mode Macro Controller",
+      title: "ESP32-S3 BLE Macro Knob Controller",
       badge: "Zephyr RTOS & BLE HID",
-      role: "Sole Embedded Developer",
-      desc: "Driverless Bluetooth Low Energy desktop controller implementing HID over GATT (HOGP) for real-time audio scrubbing, mouse wheel scrolling, and display brightness control.",
-      diagram: `[ 10kΩ Potentiometer (ADC1_CH6) ] ──> [ EMA Filter & Deadband ] ──> [ 3-State Mode FSM ] 
-                                                                         │
-[ 3x Tactile Switches (GPIO 4, 5, 6) ] ──────────────────────────────────┤
-                                                                         ▼
-                                                       [ BLE HOGP Composite GATT Server ]
-                                                       ├── Report ID 1: Consumer Control
-                                                       ├── Report ID 2: Mouse (Wheel Axis)
-                                                       └── Status LED Async Work Queue`,
+      role: "Sole Developer",
+      desc: "Driverless Bluetooth Low Energy desktop controller using HOGP for real-time volume scrubbing, mouse scrolling, and display brightness control.",
+      diagram: `[ Potentiometer (ADC) ] ──> [ EMA Filter ] ──> [ 3-Mode FSM ] ──> [ BLE Composite HID ]
+[ 3x Push Buttons     ] ──> [ Debounce   ] ──────────────────────────┤
+                                                                     └── [ Status LED WorkQ ]`,
       highlights: [
-        "Architected composite BLE HID report descriptor combining Consumer Control (0x0C) and Mouse Pointer (0x01) endpoints for native cross-platform support without host drivers.",
-        "Implemented 12 dB ADC attenuation with a 1st-order Exponential Moving Average (EMA) filter and dynamic deadband window, eliminating wiper noise and phantom packets.",
-        "Engineered a non-blocking 3-mode finite state machine with asynchronous k_work_delayable background LED blink engine and long-press detection."
+        "Built composite BLE HID profile (Consumer Control + Mouse Wheel) for native plug-and-play across OS platforms.",
+        "Filtered analog potentiometer noise using 12 dB ADC attenuation, a 1st-order EMA filter, and dynamic deadbands.",
+        "Created a non-blocking 3-mode state machine with asynchronous LED blink feedback using Zephyr work queues."
       ],
-      tech: ["Zephyr RTOS", "ESP32-S3", "BLE HOGP", "Composite HID", "ADC Calibration", "EMA Filtering", "C"],
+      tech: ["Zephyr RTOS", "ESP32-S3", "BLE HOGP", "ADC", "C"],
       github: "https://github.com/Biruk-aki/esp32s3-ble-macro-knob"
     },
     {
