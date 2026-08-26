@@ -145,7 +145,7 @@ export default function App() {
             <li><a href="#projects"><span className="num">03.</span> Projects</a></li>
             <li><a href="#experience"><span className="num">04.</span> Experience</a></li>
           </ol>
-          <a href="/Biruk_Ambaye_CV.pdf" target="_blank" rel="noreferrer" className="resume-btn">
+          <a href="/Biruk_Ambaye_Resume.pdf" target="_blank" rel="noreferrer" className="resume-btn">
             Resume
           </a>
         </div>
